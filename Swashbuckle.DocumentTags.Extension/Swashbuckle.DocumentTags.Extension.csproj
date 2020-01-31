@@ -9,7 +9,8 @@
     <RepositoryUrl>https://github.com/waxtell/Swashbuckle.DocumentTags.Extension.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Swashbuckle OAS tag</PackageTags>
-    <PackageReleaseNotes>1.0.0- Initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>1.0.1- Initial release</PackageReleaseNotes>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
