@@ -10,7 +10,7 @@ Adding document level tags to your OAS:
             {
                 c.WithDocumentTags
                 (
-                    dtc => dtc.Tags = new[]
+                    new[]
                     {
                         new OpenApiTag { Name = "Products", Description = "Browse/manage the product catalog" },
                         new OpenApiTag { Name = "Orders", Description = "Submit orders" }

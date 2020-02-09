@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
+[assembly: InternalsVisibleTo("Swashbuckle.DocumentTags.Extension.Tests")]
 namespace Swashbuckle.DocumentTags.Extension
 {
+
     internal class DocumentTagsDocumentFilter : IDocumentFilter
     {
         private readonly DocumentTagsConfig _config;
@@ -15,7 +18,11 @@ namespace Swashbuckle.DocumentTags.Extension
 
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
-            swaggerDoc.Tags = _config.Tags?.ToList();
+            var joinedTagsList = new List<OpenApiTag>(swaggerDoc.Tags);
+            
+            joinedTagsList.AddRange(_config.Tags);
+
+            swaggerDoc.Tags = joinedTagsList;
         }
     }
 }
