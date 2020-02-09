@@ -37,7 +37,7 @@ namespace SampleApp9000
 
                 c.WithDocumentTags
                 (
-                    dtc => dtc.Tags = new[]
+                    new[]
                     {
                         new OpenApiTag { Name = "Products", Description = "Browse/manage the product catalog" },
                         new OpenApiTag { Name = "Orders", Description = "Submit orders" }
