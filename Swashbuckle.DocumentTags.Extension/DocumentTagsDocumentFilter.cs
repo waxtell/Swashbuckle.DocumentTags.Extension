@@ -1,28 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 [assembly: InternalsVisibleTo("Swashbuckle.DocumentTags.Extension.Tests")]
-namespace Swashbuckle.DocumentTags.Extension
+
+namespace Swashbuckle.DocumentTags.Extension;
+
+internal class DocumentTagsDocumentFilter(DocumentTagsConfig config) : IDocumentFilter
 {
+    private readonly DocumentTagsConfig _config = config;
 
-    internal class DocumentTagsDocumentFilter : IDocumentFilter
+    public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
     {
-        private readonly DocumentTagsConfig _config;
-
-        public DocumentTagsDocumentFilter(DocumentTagsConfig config)
+        // Initialize collection if null (OpenAPI.NET v2 doesn't initialize collections by default)
+        swaggerDoc.Tags ??= new HashSet<OpenApiTag>();
+        
+        // Add the configured tags
+        foreach (var tag in _config.Tags)
         {
-            _config = config;
-        }
-
-        public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
-        {
-            var joinedTagsList = new List<OpenApiTag>(swaggerDoc.Tags);
-            
-            joinedTagsList.AddRange(_config.Tags);
-
-            swaggerDoc.Tags = joinedTagsList;
+            swaggerDoc.Tags.Add(tag);
         }
     }
 }

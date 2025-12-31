@@ -2,28 +2,22 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-namespace Swashbuckle.DocumentTags.Extension.Tests
+namespace Swashbuckle.DocumentTags.Extension.Tests;
+
+public class FakeApiDescriptionGroupCollectionProvider(IEnumerable<ApiDescription> apiDescriptions) : IApiDescriptionGroupCollectionProvider
 {
-    public class FakeApiDescriptionGroupCollectionProvider : IApiDescriptionGroupCollectionProvider
+    private readonly IEnumerable<ApiDescription> _apiDescriptions = apiDescriptions;
+
+    public ApiDescriptionGroupCollection ApiDescriptionGroups
     {
-        private readonly IEnumerable<ApiDescription> _apiDescriptions;
-
-        public FakeApiDescriptionGroupCollectionProvider(IEnumerable<ApiDescription> apiDescriptions)
+        get
         {
-            _apiDescriptions = apiDescriptions;
-        }
+            var apiDescriptionGroups = _apiDescriptions
+                .GroupBy(item => item.GroupName)
+                .Select(grouping => new ApiDescriptionGroup(grouping.Key, grouping.ToList()))
+                .ToList();
 
-        public ApiDescriptionGroupCollection ApiDescriptionGroups
-        {
-            get
-            {
-                var apiDescriptionGroups = _apiDescriptions
-                    .GroupBy(item => item.GroupName)
-                    .Select(grouping => new ApiDescriptionGroup(grouping.Key, grouping.ToList()))
-                    .ToList();
-
-                return new ApiDescriptionGroupCollection(apiDescriptionGroups, 1);
-            }
+            return new ApiDescriptionGroupCollection(apiDescriptionGroups, 1);
         }
     }
 }

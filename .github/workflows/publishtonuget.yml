@@ -8,11 +8,11 @@ jobs:
     name: publish to nuget
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
         
       # Publish
       - name: Publish NuGet
-        uses: rohith/publish-nuget@v1.2.0
+        uses: rohith/publish-nuget@v2.6.0
         with:
            project_dir: Swashbuckle.DocumentTags.Extension
            tag_format: v*
