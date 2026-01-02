@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Swashbuckle.DocumentTags.Extension;
@@ -10,13 +9,6 @@ namespace SampleApp9000
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -37,11 +29,10 @@ namespace SampleApp9000
 
                 c.WithDocumentTags
                 (
-                    new[]
-                    {
+                    [
                         new OpenApiTag { Name = "Products", Description = "Browse/manage the product catalog" },
                         new OpenApiTag { Name = "Orders", Description = "Submit orders" }
-                    }
+                    ]
                 );
             });
         }

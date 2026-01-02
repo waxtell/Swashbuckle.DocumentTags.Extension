@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Authors>Will Axtell</Authors>
     <Company>Will Axtell</Company>
     <Description>Add document level Tags to your OAS!</Description>
@@ -9,13 +9,15 @@
     <RepositoryUrl>https://github.com/waxtell/Swashbuckle.DocumentTags.Extension.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Swashbuckle OAS tag</PackageTags>
-    <PackageReleaseNotes>1.0.2- Add tests and more user friend configuration extension
-1.0.1- Initial release</PackageReleaseNotes>
-    <Version>1.0.2</Version>
+    <PackageReleaseNotes>
+    2.0.0- Upgraded to .NET 8 and Swashbuckle.AspNetCore v10.1. Modernized codebase with primary constructors and file-scoped namespaces. Updated to use Microsoft.OpenApi v2+ APIs.
+    1.0.2- Add tests and more user friend configuration extension
+    1.0.1- Initial release</PackageReleaseNotes>
+    <VersionPrefix>2.0.0</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
   </ItemGroup>
 
 </Project>
