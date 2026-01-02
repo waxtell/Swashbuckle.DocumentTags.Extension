@@ -12,8 +12,8 @@ jobs:
         
       # Publish
       - name: Publish NuGet
-        uses: rohith/publish-nuget@v2.6.0
+        uses: brandedoutcast/publish-nuget@v2
         with:
-           project_dir: Swashbuckle.DocumentTags.Extension
-           tag_format: v*
-           nuget_key: ${{secrets.NUGET_API_KEY}}
+           PROJECT_FILE_PATH: Swashbuckle.DocumentTags.Extension
+           TAG_FORMAT: v*
+           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
