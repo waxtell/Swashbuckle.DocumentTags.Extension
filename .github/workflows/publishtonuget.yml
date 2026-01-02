@@ -16,4 +16,5 @@ jobs:
         with:
            PROJECT_FILE_PATH: Swashbuckle.DocumentTags.Extension/Swashbuckle.DocumentTags.Extension.csproj
            TAG_FORMAT: v*
+           VERSION_REGEX: ^\s*<VersionPrefix>(.*)<\/VersionPrefix>\s*$
            NUGET_KEY: ${{secrets.NUGET_API_KEY}}
