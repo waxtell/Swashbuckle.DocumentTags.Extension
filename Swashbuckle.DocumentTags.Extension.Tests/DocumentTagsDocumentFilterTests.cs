@@ -16,23 +16,23 @@ public class DocumentTagsDocumentFilterTests
     {
         var config = new DocumentTagsConfig
         {
-            Tags = new[]
-            {
+            Tags =
+            [
                 new OpenApiTag
                 {
                     Description = description, 
                     Name = name
                 }
-            }
+            ]
         };
 
         var subject = Subject(
-            apiDescriptions: new ApiDescription[] { },
+            apiDescriptions: [],
             options: new SwaggerGeneratorOptions
             {
                 SwaggerDocs = new Dictionary<string, OpenApiInfo>
                 {
-                    ["v1"] = new OpenApiInfo { Version = "V1", Title = "Test API" }
+                    ["v1"] = new() { Version = "V1", Title = "Test API" }
                 },
                 DocumentFilters = new List<IDocumentFilter>
                 {
@@ -43,7 +43,8 @@ public class DocumentTagsDocumentFilterTests
 
         var document = subject.GetSwagger("v1");
 
-        Assert.Single(document.Tags);
+        Assert.NotNull(document?.Tags);
+        Assert.Single(document!.Tags);
         Assert.Equal(name,document.Tags.First().Name);
         Assert.Equal(description, document.Tags.First().Description);
     }
